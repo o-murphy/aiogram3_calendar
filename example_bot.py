@@ -11,7 +11,8 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, CallbackQuery
 from aiogram.utils.markdown import hbold
 
-from config import API_TOKEN
+# from config import API_TOKEN
+API_TOKEN = '6610183902:AAG9dtkx1LT6kZRva8v7AxF3ExTAl5RP8Lo'
 
 # API_TOKEN = '' uncomment and insert your telegram bot API key here
 

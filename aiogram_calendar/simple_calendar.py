@@ -67,6 +67,9 @@ class SimpleCalendar(GenericCalendar):
 
         # Calendar rows - Days of month
         month_calendar = calendar.monthcalendar(year, month)
+
+        today = datetime.now().day
+
         for week in month_calendar:
             days_row = []
             for day in week:
@@ -74,7 +77,7 @@ class SimpleCalendar(GenericCalendar):
                     days_row.append(InlineKeyboardButton(text=" ", callback_data=self.ignore_callback))
                     continue
                 days_row.append(InlineKeyboardButton(
-                    text=str(day),
+                    text=str(day) if today != day else f"[{day}]",
                     callback_data=SimpleCalendarCallback(act=SimpleCalAct.day, year=year, month=month, day=day).pack()
                 ))
             kb.append(days_row)

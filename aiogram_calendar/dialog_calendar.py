@@ -76,6 +76,9 @@ class DialogCalendar(GenericCalendar):
         kb.append(week_days_labels_row)
 
         month_calendar = calendar.monthcalendar(year, month)
+
+        today = datetime.now().day
+
         for week in month_calendar:
             days_row = []
             for day in week:
@@ -83,7 +86,7 @@ class DialogCalendar(GenericCalendar):
                     days_row.append(InlineKeyboardButton(text=" ", callback_data=self.ignore_callback))
                     continue
                 days_row.append(InlineKeyboardButton(
-                    text=str(day),
+                    text=str(day) if today != day else f"[{day}]",
                     callback_data=DialogCalendarCallback(act=DialogCalAct.day, year=year, month=month, day=day).pack()
                 ))
             kb.append(days_row)
