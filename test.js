@@ -1,5 +1,5 @@
 console.log("hello")
 console.log(window.Telegram.WebApp)
 window.Telegram.WebApp.MainButton.setText("Send data")
-window.Telegram.WebApp.MainButton.onClick(() => window.Telegram.WebApp.sendData("ololol"))
+window.Telegram.WebApp.MainButton.onClick(() => window.Telegram.WebApp.sendData("29.11.23"))
 window.Telegram.WebApp.MainButton.show()

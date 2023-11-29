@@ -31,10 +31,7 @@ async def check_data_handler(request: Request):
 # starting dialog calendar with year 1989 & month
 @dp.message(CommandStart())
 async def dialog_cal_handler_month(message: Message):
-    # btn = InlineKeyboardButton(
-    #     text="Select", web_app=WebAppInfo(url='http://127.0.0.1:63342/aiogram3_calendar/test.html?_ijt=fk5bk9r42o74ku6k0nainbl56b')
-    # )
-    # kb = InlineKeyboardMarkup(inline_keyboard=[[btn]])
+
     btn = KeyboardButton(
         text="Select",
         web_app=WebAppInfo(url='http://127.0.0.1:63342/aiogram3_calendar/test.html?_ijt=fk5bk9r42o74ku6k0nainbl56b')
@@ -45,8 +42,7 @@ async def dialog_cal_handler_month(message: Message):
 
 @dp.message()
 async def dialog_cal_handler_month(message: Message):
-    print(message.web_app_data)
-    await message.answer("Select date")
+    await message.answer(f"Selected date {message.web_app_data.data}")
 
 
 async def main() -> None:
