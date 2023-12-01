@@ -4,10 +4,10 @@ import sys
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.session.aiohttp import AiohttpSession
-from aiogram.client.telegram import TEST
+from aiogram.client.telegram import TEST, TelegramAPIServer
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
-from aiogram.types import Message, InlineKeyboardButton, WebAppInfo, KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import Message, InlineKeyboardButton, WebAppInfo, KeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.web_app import safe_parse_webapp_init_data
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
@@ -31,12 +31,17 @@ async def check_data_handler(request: Request):
 # starting dialog calendar with year 1989 & month
 @dp.message(CommandStart())
 async def dialog_cal_handler_month(message: Message):
-
-    btn = KeyboardButton(
+    btn = InlineKeyboardButton(
         text="Select",
-        web_app=WebAppInfo(url='http://127.0.0.1:63342/aiogram3_calendar/test.html?_ijt=fk5bk9r42o74ku6k0nainbl56b')
+        web_app=WebAppInfo(url='http://127.0.0.1:63342/aiogram3_calendar/test.html?_ijt=ukdt9c3sk1d4gcrsanmk6m465o')
     )
-    kb = ReplyKeyboardMarkup(keyboard=[[btn]])
+    kb = InlineKeyboardMarkup(inline_keyboard=[[btn]])
+
+    # btn = KeyboardButton(
+    #     text="Select",
+    #     web_app=WebAppInfo(url='http://127.0.0.1:63342/aiogram3_calendar/test.html?_ijt=fk5bk9r42o74ku6k0nainbl56b')
+    # )
+    # kb = ReplyKeyboardMarkup(keyboard=[[btn]])
     await message.answer("Select date", reply_markup=kb)
 
 
@@ -47,7 +52,11 @@ async def dialog_cal_handler_month(message: Message):
 
 async def main() -> None:
     session = AiohttpSession(
-        api=TEST
+        api=TelegramAPIServer(
+            base="https://api.telegram.org/bot{token}/test/{method}",
+            # base="https://aiogram-calendar.o-murphy.net/bot{token}/test/{method}",
+            file="https://api.telegram.org/file/bot{token}/test/{path}",
+        )
     )
 
     # Initialize Bot instance with a default parse mode which will be passed to all API calls
